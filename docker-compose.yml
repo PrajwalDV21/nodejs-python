@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./api"
+
+  sys-stats:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./sys-stats
+
+  nginx:
+    depends_on:
+      - api
+      - sys-stats
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
