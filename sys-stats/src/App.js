@@ -20,7 +20,9 @@ class App extends Component {
 
   async loadData() {
     try {
-      const res = await fetch('http://localhost:3050/api/stats');
+      var url_api = `${process.env.PUBLIC_URL}/api/stats`;
+      console.log(url_api);
+      const res = await fetch(url_api);
       console.log(res);
       const blocks = await res.json();
       const ram = blocks.ram;
